@@ -37,17 +37,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     
     'django_bootstrap5',
     'django_extensions',
     'django_cleanup',
     'imagekit',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     # 'mdeditor',
     # 'fontawesomefree',
     
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
 ]
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = 'top'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

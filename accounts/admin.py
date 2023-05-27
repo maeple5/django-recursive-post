@@ -18,7 +18,7 @@
 #     fieldsets = ( 
 #         (None, {
 #             "fields": (
-#                 "screen_user_id",
+#                 "username",
 #                 'password',
 #                 'email',
 #                 'is_active',
@@ -31,7 +31,7 @@
 #         (None, {
 #             'classes': ('wide',),
 #             'fields': (
-#                 "screen_user_id",
+#                 "username",
 #                 'password',
 #                 'email',
 #                 'is_active',
@@ -42,7 +42,7 @@
 #     )
 
 #     list_display = (
-#         'screen_user_id',
+#         'username',
 #         'created_at',
 #         'id',
 #     )
@@ -53,9 +53,9 @@
 #         "groups",
 #     )
 
-#     search_fields = ("screen_user_id", "id")
-#     list_display_links = ("screen_user_id", "id")
-#     ordering = ("screen_user_id", "created_at")
+#     search_fields = ("username", "id")
+#     list_display_links = ("username", "id")
+#     ordering = ("username", "created_at")
 
 # # admin.site.unregister(User)
 # admin.site.register(User, UserAdmin)

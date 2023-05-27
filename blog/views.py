@@ -23,9 +23,9 @@ class PostDetail(generic.DetailView):
         return context
 
 
-def comment_create(request, post_pk):
+def comment_create(request, pk):
     """記事へのコメント作成"""
-    post = get_object_or_404(Post, pk=post_pk)
+    post = get_object_or_404(Post, pk=pk)
     form = CommentForm(request.POST or None)
 
     if request.method == 'POST':

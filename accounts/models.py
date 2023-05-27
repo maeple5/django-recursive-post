@@ -29,36 +29,36 @@ GENDER_CHOICES = (
 )
 
 class UserManager(BaseUserManager):
-    def _create_user(self, screen_user_id, email, password, **extra_fields):
-        if not screen_user_id:
+    def _create_user(self, username, email, password, **extra_fields):
+        if not username:
             raise ValueError('Users must have an user-ID')
         email = self.normalize_email(email)
-        screen_user_id = self.model.normalize_username(screen_user_id)
-        user = self.model(screen_user_id=screen_user_id, email=email, **extra_fields)
+        username = self.model.normalize_username(username)
+        user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_user(self, screen_user_id, email=None, password=None, **extra_fields):
+    def create_user(self, username, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user(screen_user_id, email, password, **extra_fields)
+        return self._create_user(username, email, password, **extra_fields)
 
-    def create_staff(self, screen_user_id, email, password, **extra_fields):
+    def create_staff(self, username, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', False)
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Stuff must have is_staff=True.')
-        return self._create_user(screen_user_id, email, password, **extra_fields)
+        return self._create_user(username, email, password, **extra_fields)
 
-    def create_superuser(self, screen_user_id, email, password, **extra_fields):
+    def create_superuser(self, username, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Administrator must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Administrator must have is_superuser=True.')
-        return self._create_user(screen_user_id, email, password, **extra_fields)
+        return self._create_user(username, email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
 
@@ -70,7 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     screen_user_id_validator = ASCIIUsernameValidator() # 日本語は使えない
-    screen_user_id = models.CharField(
+    username = models.CharField(
         _('ユーザーID'),
         max_length=50,
         unique=True,
@@ -115,7 +115,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                             )
     objects = UserManager()
     EMAIL_FIELD = 'email'
-    USERNAME_FIELD = 'screen_user_id'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
     class Meta:
@@ -126,7 +126,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         #abstract = True # 
 
     def get_absolute_url(self):
-        return reverse('snsapp:detail', kwargs={'screen_user_id': self.screen_user_id})
+        return reverse('snsapp:detail', kwargs={'username': self.username})
 
     def __str__(self):
         return str(self.id)
@@ -197,7 +197,7 @@ class Profile(models.Model):
         verbose_name = _('profile')
 
     def __str__(self):
-        return str(self.user.screen_user_id)
+        return str(self.user.username)
 
     # 以下はヘッダー画像のサイズ指定・形式指定
     big_header_pic = ImageSpecField(

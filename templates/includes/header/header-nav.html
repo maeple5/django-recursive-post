@@ -1,8 +1,16 @@
+{% load static %}
+
 <nav id="navi">
   <ul class="nav-menu">
     <li><a href="#pickup">PICK UP</a></li>
-    <li><a href="#feature">FEATURE</a></li>
+    <li><a href="#feature">POSTS</a></li>
     <li><a href="#contact">CONTACT</a></li>
+    {% if user.is_authenticated %}
+    <li><a href="{% url "account_logout" %}">LOGOUT</a></li>
+    {% else %}
+    <li><a href="{% url "account_login" %}">LOGIN</a></li>
+    <li><a href="{% url "account_signup" %}">SIGN UP</a></li>
+    {% endif %}
   </ul>
   <ul class="nav-sns">
     <li><a href="https://twitter.com/" target="_blank">Twitter</a></li>

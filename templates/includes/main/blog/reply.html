@@ -1,6 +1,6 @@
 {% for reply in reply_list %}
   <div class="recursive-box">
-    <p>{{ reply.pk }} <span>{{ reply.commented_by.screen_user_id }}</span>
+    <p>{{ reply.pk }} <span>{{ reply.commented_by.username }}</span>
       <small>{{ reply.commented_at }}</small>
       {% if reply.is_updated %}
       <small> {{ reply.updated_at }}編集済み</small>

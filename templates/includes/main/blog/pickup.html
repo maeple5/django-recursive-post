@@ -1,0 +1,27 @@
+{% load static %}
+<section id="pickup">
+  <h2 class="sec-title">PICK UP</h2>
+  <ul class="slick-area">
+    {% for post in posts %}
+    <li>
+      <a href="{% url 'blog:post_detail' post.id %}">
+        <img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト">
+      </a>
+    </li>
+    {% comment %} <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li>
+    <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li>
+    <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li>
+    <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li>
+    <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li>
+    <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li>
+    <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li>
+    <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li>
+    <li><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"></li> {% endcomment %}
+    {% endfor %}
+  </ul>
+  {% comment %} <ul class="slick-area">
+    {% for post in posts %}
+    <li><a href="{% url 'blog:post_detail' post.id %}"><img src="{% static "blog/img/pickup1.jpg"%}" alt="ピックアップ１　テキストテキスト"><a></li>
+    {% endfor %}
+  </ul> {% endcomment %}
+</section>

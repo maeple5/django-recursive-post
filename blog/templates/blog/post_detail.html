@@ -8,7 +8,7 @@
             <a href="{% url 'blog:post_list' %}">戻る</a>
             <hr>
 
-            <h1 class="title">{{ post.title }} by {{ post.created_by.screen_user_id }}</h1>
+            <h1 class="title">{{ post.title }} by {{ post.created_by.username }}</h1>
             <small>{{ post.created_at }}</small>
             {% if post.is_updated %}
             <small> {{ post.updated_at }}編集済み</small>
@@ -25,7 +25,7 @@
             <h2 class="title is-5">コメント一覧</h2>
             {% for comment in comment_list %}
                 <div class="recursive-box">
-                    <p>{{ comment.pk }} {{ comment.commented_by.screen_user_id }}
+                    <p>{{ comment.pk }} {{ comment.commented_by.username }}
                         <small>{{ comment.commented_at }}</small>
                         {% if comment.is_updated %}
                         <small> {{ comment.updated_at }}編集済み</small>

@@ -29,7 +29,7 @@
         <tbody>
           {% for comment in comment.comments.all %}
           <tr>
-            <th>{{ comment.commented_by.screen_user_id }}</th>
+            <th>{{ comment.commented_by.username }}</th>
             <th>{{ comment.commented_at }}</th>
             <th><a href="{% url 'comment_detail' comment.id %}">{{ comment.text }}</a></th>
           </tr>

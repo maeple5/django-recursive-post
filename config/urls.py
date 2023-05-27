@@ -23,8 +23,9 @@ handler403 = 'blog.views.handler403'
 handler404 = 'blog.views.handler404'
 handler500 = 'blog.views.handler500'
 urlpatterns = [
-    path('', top, name='top'),
-    path('snippets/', include("blog.urls")),
-    path('accounts/', include("accounts.urls")),
     path('admin/', admin.site.urls),
+    path('', top, name='top'),
+    path('posts/', include("blog.urls")),
+    path('accounts/', include("allauth.urls")),
+    # path('accounts/', include("accounts.urls")),
 ]

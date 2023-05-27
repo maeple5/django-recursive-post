@@ -1,0 +1,17 @@
+{% load static %}
+<section id="feature">
+  <h2 class="sec-title">POSTS</h2>
+  <div class="grid">
+    {% for post in posts %}
+    <div class="item">
+      <img class="fadein" src="{% static "blog/img/feature1.jpg"%}" alt="">
+      <div class="item-content">
+        <p class="item-cat">{{ post.created_by.username }}</p>
+        <p class="item-text">{{ post.title }}</p>
+        <p class="item-date">{{ post.created_at }}</p>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</section>

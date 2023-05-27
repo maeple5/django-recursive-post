@@ -6,8 +6,8 @@
   <div class="container">
     <div class="welcome">
       <h1 class="title">ようこそMaeplegoへ！</h1>
-      <p class="subtitle">気軽に会話を楽しみましょう</p>
-      <a class="btn btn-primary" href="{% url 'blog:post_new' %}">スレッドを作成する</a>
+      <p class="subtitle"></p>
+      <a class="btn btn-primary" href="{% url 'blog:post_new' %}">記事を作成する</a>
     </div>
 
     {% if posts %}
@@ -24,7 +24,7 @@
         <tr>
           <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></th>
           <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.created_at }}</a></td>
-          <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.created_by.screen_user_id }}</a></td>
+          <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.created_by.username }}</a></td>
         </tr>
         {% endfor %}
       </tbody>
@@ -33,5 +33,8 @@
     <p>スニペットはまだ投稿されていません。</p>
     {% endif %}
   </div>
+  {% include "includes/main/blog/pickup.html" %}
+  {% include "includes/main/blog/feature.html" %}
+  {% include "includes/main/blog/contact.html" %}
 </main>
 {% endblock %}
