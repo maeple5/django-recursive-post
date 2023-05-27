@@ -1,11 +1,15 @@
 from django import forms
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth import get_user_model
 from django.views import generic
 from .models import Post, Comment
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_safe, require_http_methods, require_GET
+from blog.forms import PostForm, CommentForm
 # コメント、返信フォーム
-CommentForm = forms.modelform_factory(Comment, fields=('text', ))
-
+# CommentForm = forms.modelform_factory(Comment, fields=('text', ))
+# User = get_user_model()
 
 class PostList(generic.ListView):
     """記事一覧"""
@@ -19,10 +23,13 @@ class PostDetail(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # どのコメントにも紐づかないコメント=記事自体へのコメント を取得する
+        context['comment_form'] = CommentForm
         context['comment_list'] = self.object.comment_set.filter(parent__isnull=True)
         return context
 
 
+@login_required
+@require_http_methods(["GET", "POST", "HEAD"])
 def comment_create(request, pk):
     """記事へのコメント作成"""
     post = get_object_or_404(Post, pk=pk)
@@ -31,6 +38,7 @@ def comment_create(request, pk):
     if request.method == 'POST':
         comment = form.save(commit=False)
         comment.post = post
+        print(request.user)
         comment.commented_by = request.user
         comment.save()
         return redirect('blog:post_detail', pk=post.pk)
@@ -42,6 +50,8 @@ def comment_create(request, pk):
     return render(request, 'blog/comment_form.html', context)
 
 
+@login_required
+@require_http_methods(["GET", "POST", "HEAD"])
 def reply_create(request, comment_pk):
     """コメントへの返信"""
     comment = get_object_or_404(Comment, pk=comment_pk)
@@ -64,11 +74,11 @@ def reply_create(request, comment_pk):
     return render(request, 'blog/comment_form.html', context)
 
 # from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseNotFound, HttpResponseNotAllowed
 # from blog.models import Snippet, Comment
-from blog.forms import PostForm, CommentForm
-from django.views.decorators.http import require_safe, require_http_methods, require_GET
+# from blog.forms import PostForm, CommentForm
+# from django.views.decorators.http import require_safe, require_http_methods, require_GET
 # from django.http import JsonResponse
 # from django.template.response import TemplateResponse
 from urllib.parse import quote

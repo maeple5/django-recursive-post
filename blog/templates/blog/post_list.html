@@ -3,17 +3,35 @@
 {% block main %}
 <main id="main">
   <div class="container">
-    <section class="section">
-        <div class="container">
-            {% for post in post_list %}
-                <a href="{% url 'blog:post_detail' post.pk %}">
-                    <div class="box">
-                        <p>{{ post.title }} {{ post.created_at }} {{ post.created_by.username }}</p>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    </section>
+    {% if post_list %}
+    <table class="thread-table">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>作成日</th>
+          <th>作成者</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in post_list %}
+        <tr>
+          <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></th>
+          <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.created_at }}</a></td>
+          <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.created_by.username }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>スニペットはまだ投稿されていません。</p>
+    {% endif %}
+    {% comment %} {% for post in post_list %}
+        <a href="{% url 'blog:post_detail' post.pk %}">
+            <div class="box">
+                <p>{{ post.title }} {{ post.created_at }} {{ post.created_by.username }}</p>
+            </div>
+        </a>
+    {% endfor %} {% endcomment %}
   </div>
 </main>
 {% endblock %}

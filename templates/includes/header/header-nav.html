@@ -2,9 +2,12 @@
 
 <nav id="navi">
   <ul class="nav-menu">
+    {% url 'top' as top_url %}
+    {% if request.path == top_url %}
     <li><a href="#pickup">PICK UP</a></li>
     <li><a href="#feature">POSTS</a></li>
     <li><a href="#contact">CONTACT</a></li>
+    {% endif %}
     {% if user.is_authenticated %}
     <li><a href="{% url "account_logout" %}">LOGOUT</a></li>
     {% else %}

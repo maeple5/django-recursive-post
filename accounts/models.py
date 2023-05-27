@@ -81,7 +81,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         },
     )
 
-    email = models.EmailField(_('Emailアドレス'), unique=True)
+    email = models.EmailField(_('Emailアドレス'))
     # wrong_pw: パスワードを間違えた回数をカウントする
     wrong_pw = models.DecimalField(max_digits=1, decimal_places=0, default= 0)
     # password_lock: パスワードを連続3回間違うと、1時間パスワードを入力できないようにするためのフィールド
