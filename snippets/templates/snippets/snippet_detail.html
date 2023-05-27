@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load pygmentize %}
+
+{% block extraheader %}
+<style>{% pygments_css %}</style>
+{% endblock %}
+
+{% block main %}
+<main id="main">
+  <div class="container">
+    <h2>{{ snippet.title }} by {{ snippet.created_by.username }}</h2>
+
+    <div class="snippet-date">
+      投稿日： {{ snippet.created_at | date:"DATETIME_FORMAT" }}
+      {% if user.is_authenticated and snippet.created_by_id == user.id %}
+      <a href="{% url 'snippet_edit' snippet.id %}">編集</a>
+      {% endif %}
+    </div>
+    <div class="source-code">
+      {{ snippet.code | pygmentize:"python3" }}
+    </div>
+    <p>{{ snippet.description | urlize}}</p>
+    <div class="comments-area" >
+      <h2>コメント一覧</h2>
+      {% if snippet.comments.all %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>投稿日</th>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for comment in snippet.comments.all %}
+          <tr>
+            <th>{{ comment.commented_by.username }}</th>
+            <th>{{ comment.commented_at }}</th>
+            <th><a href="{% url 'comment_detail' snippet.id comment.id %}">{{ comment.text }}</a></th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>コメントはまだ寄せされていません。</p>
+      {% endif %}
+    <!-- コメント作成フォームを表示 -->
+    <div class="comment-form">
+      <h2>コメント投稿</h2>
+      <form action='{% url "comment_new" snippet.id %}' method="post">
+        {% csrf_token %}
+        {{ comment_form}}
+        <div>
+          <button class="btn btn-primary"  type="submit">送信</button>
+        </div>
+      </form>
+    {% comment %} </div>
+      <a class="btn btn-primary" href="{% url 'comment_new' snippet.id %}">コメントする</a>
+    </div> {% endcomment %}
+  </div>
+</main>
+{% endblock %}

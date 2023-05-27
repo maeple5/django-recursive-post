@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block main %}
+<main id="main">
+  <div class="container">
+<h1>スニペットの編集</h1>
+<form method="post">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% bootstrap_button button_type="submit" content="保存" %}
+  {% comment %} {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">保存</button> {% endcomment %}
+</form>
+</div>
+</main>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load static %}
+
+<header id="header">
+  <h1 class="site-title">
+    <a href="{% url 'top' %}"><img src="img/logo.svg" alt="Maeplego"></a>
+  </h1>
+
+  {% include "includes/header/header-nav.html" %}
+
+  <div class="toggle_btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div id="mask"></div>
+</header>

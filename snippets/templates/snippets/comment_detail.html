@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load pygmentize %}
+
+{% block extraheader %}
+<style>{% pygments_css %}</style>
+{% endblock %}
+
+{% block main %}
+<main id="main">
+  <div class="container">
+    <h2>{{ comment.text }} by {{ comment.commented_by.username }}</h2>
+
+    <div class="snippet-date">
+      投稿日： {{ comment.commented_at | date:"DATETIME_FORMAT" }}
+      {% if user.is_authenticated and comment.commented_by_id == user.id %}
+      {% comment %} <a href="{% url 'comment_edit' comment.id %}">編集</a> {% endcomment %}
+      {% endif %}
+    </div>
+    <p>{{ comment.text | urlize}}</p>
+    <div class="comments-area" >
+      <h2>コメント一覧</h2>
+      {% if comment.comments.all %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>投稿日</th>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for comment in comment.comments.all %}
+          <tr>
+            <th>{{ comment.commented_by.username }}</th>
+            <th>{{ comment.commented_at }}</th>
+            <th><a href="{% url 'comment_detail' comment.id %}">{{ comment.text }}</a></th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>コメントはまだ寄せされていません。</p>
+      {% endif %}
+      
+      {% comment %} <a class="btn btn-primary" href="{% url 'comment_new' comment.id %}">コメントする</a> {% endcomment %}
+    </div>
+  </div>
+</main>
+{% endblock %}
