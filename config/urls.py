@@ -1,5 +1,5 @@
 """
-URL configuration for djangosnippets project.
+URL configuration for config project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from snippets.views import top
+from blog.views import top
 
-handler400 = 'snippets.views.handler400'
-handler403 = 'snippets.views.handler403'
-handler404 = 'snippets.views.handler404'
-handler500 = 'snippets.views.handler500'
+handler400 = 'blog.views.handler400'
+handler403 = 'blog.views.handler403'
+handler404 = 'blog.views.handler404'
+handler500 = 'blog.views.handler500'
 urlpatterns = [
     path('', top, name='top'),
-    path('snippets/', include("snippets.urls")),
+    path('snippets/', include("blog.urls")),
     path('accounts/', include("accounts.urls")),
     path('admin/', admin.site.urls),
 ]

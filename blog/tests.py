@@ -3,8 +3,8 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase, Client, RequestFactory
 from django.http import HttpRequest
 from django.urls import resolve
-from snippets.views import top, snippet_new, snippet_edit, snippet_detail
-from snippets.models import Snippet
+from blog.views import top, snippet_new, snippet_edit, snippet_detail
+from blog.models import Snippet
 
 
 UserModel = get_user_model()

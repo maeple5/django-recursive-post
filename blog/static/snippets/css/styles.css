@@ -172,6 +172,26 @@ Main
   padding-top: 80px;
 }
 
+.recursive-box {
+  border: 1px solid #000;
+  padding-left: 1rem;
+}
+
+.welcome {
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  background-color: #eee;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+table.thread-table td {
+  width: 80%;
+}
+table.thread-table td a {
+  display: block;       /* リンクをブロックレベル化して表示 */
+  padding: 0.6em 1em;   /* 内側の余白量を上下に0.6文字分＆左右に1文字分にする */
+}
 /*-------------------------------------------
 Video
 -------------------------------------------*/

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+{% block main %}
+<main id="main">
+  <div class="container">
+    <div class="welcome">
+      <h1 class="title">ようこそMaeplegoへ！</h1>
+      <p class="subtitle">気軽に会話を楽しみましょう</p>
+      <a class="btn btn-primary" href="{% url 'blog:post_new' %}">スレッドを作成する</a>
+    </div>
+
+    {% if posts %}
+    <table class="thread-table">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>作成日</th>
+          <th>作成者</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+        <tr>
+          <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></th>
+          <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.created_at }}</a></td>
+          <td><a href="{% url 'blog:post_detail' post.id %}">{{ post.created_by.screen_user_id }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>スニペットはまだ投稿されていません。</p>
+    {% endif %}
+  </div>
+</main>
+{% endblock %}

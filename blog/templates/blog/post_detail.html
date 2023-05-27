@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<main id="main">
+  <div class="container">
+    <section class="section">
+        <div class="container">
+            <a href="{% url 'blog:post_list' %}">戻る</a>
+            <hr>
+
+            <h1 class="title">{{ post.title }} by {{ post.created_by.screen_user_id }}</h1>
+            <small>{{ post.created_at }}</small>
+            {% if post.is_updated %}
+            <small> {{ post.updated_at }}編集済み</small>
+            {% endif %}
+            {% if user.is_authenticated and post.created_by_id == user.id %}
+            <a href="{% url 'blog:post_edit' post.id %}">編集する</a>
+            {% endif %}
+            <div class="content">
+                {{ post.content | linebreaks }}
+            </div>
+            <a href="{% url 'blog:comment_create' post.pk %}">コメントする</a>
+
+            <hr>
+            <h2 class="title is-5">コメント一覧</h2>
+            {% for comment in comment_list %}
+                <div class="recursive-box">
+                    <p>{{ comment.pk }} {{ comment.commented_by.screen_user_id }}
+                        <small>{{ comment.commented_at }}</small>
+                        {% if comment.is_updated %}
+                        <small> {{ comment.updated_at }}編集済み</small>
+                        {% endif %}
+                        {% if user.is_authenticated and comment.commented_by_id == user.id %}
+                        <a href="{% url 'blog:comment_edit' comment.id %}">編集する</a>
+                        {% endif %}
+                    </p>
+                    <p>{{ comment.text }}
+                    </p>
+                    <a href="{% url 'blog:reply_create' comment.pk %}">返信する</a>
+                    {% with reply_list=comment.comment_set.all %}
+                        {% include 'includes/main/blog/reply.html' %}
+                    {% endwith %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+  </div>
+<main>
+{% endblock %}
