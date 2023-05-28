@@ -1,4 +1,4 @@
-### 簡単な掲示板です。製作期間：約1日。
+### 簡単な掲示板です。
 - このリポジトリの内容は[PythonAnywhereにて公開](https://maeple5.pythonanywhere.com)しています。
 - これとは[別の公開リポジトリ](https://github.com/maeple5/portfolio-CSS-practice)にあるJSファイルを活用し、取り入れています。
 - テンプレートはincludeを多用して管理することを心掛けました。
