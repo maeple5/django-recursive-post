@@ -29,7 +29,7 @@
 
 - その他こだわったポイントとして、記事へのコメント機能があります。
 コメントへの返信、またその返信への返信を、再帰的な入れ子になるようにしてあります。
-
+![recursivecommment.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3288404/2fe03f52-a140-c2f7-6aad-bdbdfc80359c.png)
 
 使用方法
 
