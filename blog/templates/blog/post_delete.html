@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<main id="main">
+    <section class="section">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <p>この記事を削除しますか？</p>
+                <table class="table table-sm table-bordered table-responsive">
+                    <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <td>{{ object.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>記事名</th>
+                            <td>{{ object.title }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input class="btn btn-danger" type="submit" value="削除する">
+            </form>
+        </div>
+    </section>
+<main>
+{% endblock %}

@@ -8,6 +8,7 @@ register_converter(converters.FourDigitYearConverter, 'yyyy')
 urlpatterns = [
     path('', views.PostList.as_view(), name='post_list'),
     path('detail/<int:pk>/', views.PostDetail.as_view(), name='post_detail'),
+    path('detail/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post_delete'),
     path("detail/<int:pk>/edit/", views.post_edit, name="post_edit"),
     path('comment/<int:pk>/', views.comment_create, name='comment_create'),
     path('comment/<int:pk>/edit/', views.comment_edit, name='comment_edit'),

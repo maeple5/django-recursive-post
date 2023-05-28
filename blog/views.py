@@ -2,11 +2,14 @@ from django import forms
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
 from django.views import generic
+from django.views.generic.edit import DeleteView
 from .models import Post, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_safe, require_http_methods, require_GET
 from blog.forms import PostForm, CommentForm
+from django.urls import reverse_lazy
+
 # コメント、返信フォーム
 # CommentForm = forms.modelform_factory(Comment, fields=('text', ))
 # User = get_user_model()
@@ -26,7 +29,10 @@ class PostDetail(generic.DetailView):
         context['comment_form'] = CommentForm
         context['comment_list'] = self.object.comment_set.filter(parent__isnull=True)
         return context
-
+class PostDeleteView(DeleteView):
+    template_name = "blog/post_delete.html"
+    model = Post
+    success_url = reverse_lazy("blog:post_list")
 
 @login_required
 @require_http_methods(["GET", "POST", "HEAD"])
