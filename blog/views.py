@@ -135,7 +135,7 @@ def comment_edit(request, pk):
             form.save()
             comment.is_updated = True
             comment.save()
-            return redirect('blog:post_detail', pk=comment.pk)
+            return redirect('blog:post_detail', pk=comment.post.pk)
     else:
         form = CommentForm(instance=comment)
     return render(request, "blog/comment_edit.html", {'form': form})
