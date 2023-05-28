@@ -1,7 +1,7 @@
 ### 簡単な掲示板です。製作期間：約1日。
 - [PythonAnywhereにて公開](https://maeple5.pythonanywhere.com)しています。
 - [これとは別の公開リポジトリ](https://github.com/maeple5/portfolio-CSS-practice)にあるJSファイルを活用し、取り入れています。
-- テンプレートをincludeを多用して管理することを心掛けました。
+- テンプレートはincludeを多用して管理することを心掛けました。
 - 全く網羅はしていませんがいくつかテストを書いています。
 - 認証機能にはdjango-allauthを使いました。なお、django-allauthのテンプレートは現時点では整えていません。
 
