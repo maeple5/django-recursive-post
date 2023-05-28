@@ -8,7 +8,7 @@
 - 少し工夫したところとして、ヘッダーのナビのリスト（PICKUP, FEATURE, CONTACT, LOGIN, etc...）にあります。
 トップページではPICKUP, FEATURE, CONTACTをクリックすることでページがスクロールするようにしてあります。
 トップページ以外ではリストにPICKUP, FEATURE, CONTACTを含めないようにしました。
-以下の部分になります。
+コードとしては以下の部分になります。
 
         #django-recursive-post/templates/includes/header/header-nav.html
 
