@@ -105,7 +105,6 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, "blog/post_new.html", {'form': form})
-    # return HttpResponse("スニペットの登録")
 
 @login_required
 @require_http_methods(["GET", "POST", "HEAD"])
@@ -139,7 +138,6 @@ def comment_edit(request, pk):
     else:
         form = CommentForm(instance=comment)
     return render(request, "blog/comment_edit.html", {'form': form})
-    # return HttpResponse("スニペットの編集")
 
 # @require_safe
 # def post_detail(request, post_id, comments):
